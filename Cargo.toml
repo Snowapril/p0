@@ -1,6 +1,25 @@
 [package]
 name = "p0"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
+authors = ["Your Name <your.email@example.com>"]
+description = "A simple game application using wgpu."
+license = "MIT"
+repository = "https://github.com/yourusername/p0"
+
 
 [dependencies]
+wgpu = "27.0.0"
+winit = "0.30.12"
+env_logger = "0.11.8"
+log = "0.4.28"
+pollster = "0.4"
+thiserror = "2.0.17"
+cfg-if = "1.0.3"
+
+[profile.dev]
+opt-level = 1
+
+
+[profile.release]
+opt-level = 3
