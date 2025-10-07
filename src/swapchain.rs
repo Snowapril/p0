@@ -35,18 +35,39 @@ impl SwapChain {
         })
     }
 
-    pub fn configure_surface(&self, device: &RenderDevice) {
+    pub fn configure_surface(
+        &mut self,
+        device: &RenderDevice,
+        extent: winit::dpi::PhysicalSize<u32>,
+    ) {
         let surface_config = wgpu::SurfaceConfiguration {
             usage: wgpu::TextureUsages::RENDER_ATTACHMENT,
             format: self.surface_format,
             // Request compatibility with the sRGB-format texture view we‘re going to create later.
             view_formats: vec![self.surface_format.add_srgb_suffix()],
             alpha_mode: wgpu::CompositeAlphaMode::Auto,
-            width: self.size.width,
-            height: self.size.height,
+            width: extent.width,
+            height: extent.height,
             desired_maximum_frame_latency: 2,
             present_mode: wgpu::PresentMode::AutoVsync,
         };
         self.surface.configure(&device.device(), &surface_config);
+        self.size = extent;
+    }
+
+    pub fn need_configuration(&self) -> bool {
+        if let Some(window) = self.window.upgrade() {
+            self.size != window.inner_size()
+        } else {
+            false
+        }
+    }
+
+    pub fn is_valid(&self) -> bool {
+        if let Some(window) = self.window.upgrade() {
+            self.size != window.inner_size()
+        } else {
+            false // if window handle is invalid, swapchain must be invalidated
+        }
     }
 }

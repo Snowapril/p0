@@ -42,7 +42,7 @@ impl ApplicationHandler for Engine {
         );
 
         const RETRY_COUNT: u8 = 3;
-        for iteration in [0..RETRY_COUNT] {
+        for _ in [0..RETRY_COUNT] {
             if let Ok(swapchain) = SwapChain::new(&self.render_device, window.clone()) {
                 self.swapchain = Some(swapchain);
                 break;
@@ -68,7 +68,9 @@ impl ApplicationHandler for Engine {
             WindowEvent::Resized(size) => {
                 // Reconfigures the size of the surface. We do not re-render
                 // here as this event is always followed up by redraw request.
-                // state.resize(size);
+                if let Some(swapchain) = self.swapchain.as_mut() {
+                    swapchain.configure_surface(&self.render_device, size);
+                }
             }
             _ => (),
         }

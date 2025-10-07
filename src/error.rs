@@ -9,5 +9,5 @@ pub enum DeviceError {
     #[error("Unexpected error variant (driver implementation is at fault)")]
     Unexpected,
     #[error("Current device is unavailable to run this engine")]
-    Unavailable(String)
+    Unavailable(String),
 }
