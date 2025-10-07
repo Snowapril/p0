@@ -20,7 +20,7 @@ impl SwapChain {
         let surface = instance.create_surface(window.clone()).map_err(|err| {
             DeviceError::Unavailable(format!("Failed to create surface {:?}", err))
         })?;
-        let cap = surface.get_capabilities(&adapter);
+        let cap = surface.get_capabilities(adapter);
         // TODO : decide surface format candidates and if no candidate availabe, terminate the app
         let surface_format = cap.formats[0];
         log::info!("Surface format {:?} selected", surface_format);
@@ -51,11 +51,11 @@ impl SwapChain {
             desired_maximum_frame_latency: 2,
             present_mode: wgpu::PresentMode::AutoVsync,
         };
-        self.surface.configure(&device.device(), &surface_config);
+        self.surface.configure(device.device(), &surface_config);
         self.size = extent;
     }
 
-    pub fn surface(&self) -> &wgpu::Surface {
+    pub fn surface(&self) -> &wgpu::Surface<'_> {
         &self.surface
     }
 

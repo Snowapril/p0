@@ -1,6 +1,5 @@
 use std::sync::Arc;
 
-use wgpu::Device;
 use winit::{
     application::ApplicationHandler,
     event::WindowEvent,
@@ -93,7 +92,7 @@ impl ApplicationHandler for Engine {
         );
 
         const RETRY_COUNT: u8 = 3;
-        for _ in [0..RETRY_COUNT] {
+        for _ in (0..RETRY_COUNT).collect::<std::vec::Vec<u8>>() {
             if let Ok(swapchain) = SwapChain::new(&self.render_device, window.clone()) {
                 self.swapchain = Some(swapchain);
                 break;
