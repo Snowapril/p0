@@ -44,4 +44,8 @@ impl RenderDevice {
     pub fn device(&self) -> &wgpu::Device {
         &self.device
     }
+
+    pub fn command_queue(&self) -> &wgpu::Queue {
+        &self.queue
+    }
 }

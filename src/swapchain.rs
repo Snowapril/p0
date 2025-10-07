@@ -55,6 +55,14 @@ impl SwapChain {
         self.size = extent;
     }
 
+    pub fn surface(&self) -> &wgpu::Surface {
+        &self.surface
+    }
+
+    pub fn surface_format(&self) -> &wgpu::TextureFormat {
+        &self.surface_format
+    }
+
     pub fn need_configuration(&self) -> bool {
         if let Some(window) = self.window.upgrade() {
             self.size != window.inner_size()
