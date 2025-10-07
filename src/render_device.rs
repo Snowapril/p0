@@ -14,7 +14,7 @@ impl RenderDevice {
             .request_adapter(&wgpu::RequestAdapterOptions::default())
             .await
             .map_err(|err| {
-                DeviceError::Unexpected(format!(
+                DeviceError::Unavailable(format!(
                     "Failed to get adapter from current device {:?}",
                     err
                 ))
@@ -23,7 +23,7 @@ impl RenderDevice {
             .request_device(&wgpu::DeviceDescriptor::default())
             .await
             .map_err(|err| {
-                DeviceError::Unexpected(format!("Failed to create logical device {:?}", err))
+                DeviceError::Unavailable(format!("Failed to create logical device {:?}", err))
             })?;
         Ok(RenderDevice {
             instance,

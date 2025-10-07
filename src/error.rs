@@ -7,5 +7,7 @@ pub enum DeviceError {
     #[error("Device is lost")]
     Lost,
     #[error("Unexpected error variant (driver implementation is at fault)")]
-    Unexpected(String),
+    Unexpected,
+    #[error("Current device is unavailable to run this engine")]
+    Unavailable(String)
 }

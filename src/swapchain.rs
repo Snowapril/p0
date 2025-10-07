@@ -18,7 +18,7 @@ impl SwapChain {
         let adapter = device.adapter();
 
         let surface = instance.create_surface(window.clone()).map_err(|err| {
-            DeviceError::Unexpected(format!("Failed to create surface {:?}", err))
+            DeviceError::Unavailable(format!("Failed to create surface {:?}", err))
         })?;
         let cap = surface.get_capabilities(&adapter);
         // TODO : decide surface format candidates and if no candidate availabe, terminate the app
