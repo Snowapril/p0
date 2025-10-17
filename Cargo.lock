@@ -1229,6 +1229,7 @@ dependencies = [
 name = "p0"
 version = "0.1.0"
 dependencies = [
+ "bitflags 2.9.4",
  "cfg-if",
  "env_logger",
  "glam",
