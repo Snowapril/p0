@@ -2,7 +2,9 @@ use winit::event_loop::{ControlFlow, EventLoop};
 mod engine;
 mod error;
 mod render_device;
+mod render_resource;
 mod swapchain;
+mod texture;
 use engine::Engine;
 
 // Initialize logging in platform dependant ways.
