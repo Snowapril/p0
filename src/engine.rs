@@ -55,7 +55,12 @@ impl Engine {
                 depth_slice: None,
                 resolve_target: None,
                 ops: wgpu::Operations {
-                    load: wgpu::LoadOp::Clear(wgpu::Color::GREEN),
+                    load: wgpu::LoadOp::Clear(wgpu::Color {
+                    r: rand::random::<f64>(),
+                    g: rand::random::<f64>(),
+                    b: rand::random::<f64>(),
+                    a: 1.0
+                    }),
                     store: wgpu::StoreOp::Store,
                 },
             })],
