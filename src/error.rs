@@ -11,3 +11,9 @@ pub enum DeviceError {
     #[error("Current device is unavailable to run this engine")]
     Unavailable(String),
 }
+
+#[derive(Clone, Debug, PartialEq, Eq, Error)]
+pub enum ResourceError {
+    #[error("Parent resource already dropped")]
+    Orphan,
+}
